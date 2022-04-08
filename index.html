@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <div>
+    <h4>access_token:</h4> <span id="access_token"> </span>
+  </div>
+  <div>
+    <h4>refresh_token:</h4> <span id="refresh_token"> </span>
+  </div>
+  <br />
+  <br />
+  <div>
+    <!-- <button onclick="setToken()">set access_token</button> -->
+    <button onclick="exit()">exit</button>
+  </div>
+
+  <script>
+    function exit() {
+      velocity.postMessage("exit");
+    }
+
+    // test storage event
+    function setToken() {
+      window.sessionStorage.setItem("access_token", "access token 1111111111");
+      window.sessionStorage.setItem("refresh_token", "refresh token 2222222");
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    window.addEventListener("storage", (e) => {
+      console.log("storage is triggered");
+      document.getElementById("access_token").textContent = window.sessionStorage.getItem('access_token');
+      document.getElementById("refresh_token").textContent = window.sessionStorage.getItem('refresh_token');
+    }
+    );
+
+  </script>
+
+</body>
+
+</html>
