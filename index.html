@@ -23,7 +23,11 @@
 
   <script>
     function exit() {
-      velocity.exit.postMessage("");
+      try{
+      velocity_exit.postMessage("");
+      }catch(e){
+      alert(e.message);
+      }
     }
 
     // test storage event
