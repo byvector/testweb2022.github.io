@@ -1,63 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
-<style>
-html {
-	 -webkit-text-size-adjust:none; /* prevent font scaling in landscape */
-	font-family: "SC Sans Regular", Arial, sans-serif; 
-    font-size:100%;
-    }	
+    <style>
+        html {
+            -webkit-text-size-adjust:none; /* prevent font scaling in landscape */
+            font-family: "SC Sans Regular", Arial, sans-serif;
+            display:none;}
+    </style>
 </head>
-  
-<body>
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <div>version: 3</div>
-  <div>
-    <h4>access_token:</h4> <span id="access_token"> </span>
-  </div>
-  <div>
-    <h4>refresh_token:</h4> <span id="refresh_token"> </span>
-  </div>
-  <br />
-  <br />
-  <a href="https://www.sc.com/pk/" target="blank">open a link</a>
-  <br />
-  <br />
-  <div>
-    <!-- <button onclick="setToken()">set access_token</button> -->
-    <button onclick="exit()">exit</button>
-  </div>
-  
 
-  <script>
+<body>
+<h2> SSO Web Page Testing</h2>
+<div>page version: 4</div>
+<div>
+    <h4>get the access_token from session storage:</h4>
+    <div id="access_token"></div>
+</div>
+<br/>
+<div>
+    <h4>get the refresh_token from session storage:</h4>
+    <div id="refresh_token"></div>
+</div>
+<br/>
+<a href="https://www.sc.com/pk/" target="blank">open a link in the webview</a>
+<br/>
+<br/>
+<div>
+    <!-- <button onclick="setToken()">set access_token</button> -->
+    <button onclick="exit()">Exit the webview</button>
+</div>
+
+
+<script>
     function exit() {
-      try{
-      velocity_exit.postMessage("");
-      }catch(e){
-      alert(e.message);
-      }
+        try {
+            velocity_exit.postMessage("");
+        } catch (e) {
+            alert(e.message);
+        }
     }
 
     // test storage event
     function setToken() {
-      window.sessionStorage.setItem("access_token", "access token 1111111111");
-      window.sessionStorage.setItem("refresh_token", "refresh token 2222222");
-      window.dispatchEvent(new Event('storage'));
+        window.sessionStorage.setItem("access_token", "access token 1111111111");
+        window.sessionStorage.setItem("refresh_token", "refresh token 2222222");
+        window.dispatchEvent(new Event('storage'));
     }
 
     window.addEventListener("storage", (e) => {
-      console.log("storage is triggered");
-      document.getElementById("access_token").textContent = window.sessionStorage.getItem('access_token');
-      document.getElementById("refresh_token").textContent = window.sessionStorage.getItem('refresh_token');
-    }
+            console.log("storage is triggered");
+            document.getElementById("access_token").textContent = window.sessionStorage.getItem('access_token');
+            document.getElementById("refresh_token").textContent = window.sessionStorage.getItem('refresh_token');
+        }
     );
 
-  </script>
+</script>
 
 </body>
 
